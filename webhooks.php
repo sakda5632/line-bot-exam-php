@@ -9,12 +9,13 @@ $access_token = 'NMrnXdwelhq2Rq4XEzcFZmiL6xQI/TS4/5oMGsuuL0eD1EL0DTBVohAQ/ThLPhp
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
+$message = $events['events'][0]['message']['text'];
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
-		if ($event['type'] == 'message' && $event['message']== 'UID') {
+		if ($message == 'UID') {
 			// Get text sent
 			$text = $event['source']['userId'];
 			// Get replyToken
